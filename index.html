@@ -55,11 +55,11 @@
     text-align: center;
   }
 
-  .dropdown {
+.dropdown {
     display: none;
     position: fixed;
     right: 10px;
-    top: 58px; /* Below the hamburger menu */
+    top: 58px;
     background-color: #333;
     border-radius: 4px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -120,20 +120,23 @@
 </div>
 
 <script>
-  // JavaScript for Dropdown
-  document.getElementById('menu-btn').onclick = function() {
-    document.getElementById('myDropdown').classList.toggle('show');
-  }
+  document.getElementById('menu-btn').addEventListener('click', function() {
+    var dropdown = document.getElementById('myDropdown');
+    if (dropdown.style.display === 'block') {
+      dropdown.style.display = 'none';
+    } else {
+      dropdown.style.display = 'block';
+    }
+  });
 
-  // Close the dropdown menu if the user clicks outside of it
+  // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
     if (!event.target.matches('.hamburger, .bar')) {
       var dropdowns = document.getElementsByClassName('dropdown');
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
+      for (var i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+        if (openDropdown.style.display === 'block') {
+          openDropdown.style.display = 'none';
         }
       }
     }
