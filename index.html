@@ -135,7 +135,7 @@
     <!-- Login button inside the dropdown -->
     <button id="show-login">Login</button>
     <!-- Register button inside the dropdown -->
-    <button id="register">Register</button>
+    <button id="show-register">Register</button>
     <!-- Form for Email Input -->
     <form id="login-form">
       <input type="email" placeholder="Enter Email" id="email">
@@ -145,6 +145,18 @@
     <form id="otp-form">
       <input type="text" placeholder="Enter OTP" id="otp">
       <button type="submit" id="submit-otp">Submit</button>
+    </form>
+    <!-- Registration Email Form -->
+    <form id="register-email-form" class="form">
+      <input type="email" placeholder="Enter Email" id="register-email">
+      <button type="button" id="show-details-form">Submit</button>
+    </form>
+    <!-- Registration Details Form -->
+    <form id="register-details-form" class="form">
+      <input type="text" placeholder="First Name" id="first-name">
+      <input type="text" placeholder="Last Name" id="last-name">
+      <input type="date" id="dob">
+      <button type="submit" id="finalize-registration">Submit</button>
     </form>
   </div>
 </div>
@@ -162,8 +174,11 @@
   var loginForm = document.getElementById('login-form');
   var showOtpButton = document.getElementById('show-otp');
   var otpForm = document.getElementById('otp-form');
-  var registerButton = document.getElementById('register'); // Get the register button
-
+  //var registerButton = document.getElementById('register'); // Get the register button
+  var showRegisterButton = document.getElementById('show-register');
+  var registerEmailForm = document.getElementById('register-email-form');
+  var showDetailsFormButton = document.getElementById('show-details-form');
+  var registerDetailsForm = document.getElementById('register-details-form');
   // Toggle dropdown visibility
   menuButton.addEventListener('click', function() {
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
@@ -195,6 +210,24 @@
     registerButton.style.display = 'block';
   });
 
+  showRegisterButton.addEventListener('click', function() {
+    // Show the email form for registration
+    hideAllForms();
+    registerEmailForm.style.display = 'block';
+  });
+
+  showDetailsFormButton.addEventListener('click', function() {
+    // Show the details form for registration
+    registerEmailForm.style.display = 'none';
+    registerDetailsForm.style.display = 'block';
+  });
+
+  registerDetailsForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Handle the final registration submission here
+    alert('Registration Submitted');
+    registerDetailsForm.style.display = 'none';
+  });
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
     if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
