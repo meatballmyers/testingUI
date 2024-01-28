@@ -155,6 +155,17 @@
             <input type="date" id="dob">
             <button type="submit" id="finalize-registration">Submit</button>
         </form>
+      <!-- User Profile Section, initially hidden -->
+    <div id="user-profile" class="user-profile" style="display: none;">
+        <p><strong>Last Name:</strong> <span id="user-last-name"></span></p>
+        <p><strong>First Name:</strong> <span id="user-first-name"></span></p>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+        <p><strong>Date of Birth:</strong> <span id="user-dob"></span></p>
+        <p><strong>User Role:</strong> <span id="user-role"></span></p>
+        <p><strong>User Status:</strong> <span id="user-status"></span></p>
+        <p><strong>Description:</strong> <span id="user-description"></span></p>
+        <img id="user-profile-pic" src="" alt="Profile Pic" style="width: 100px; height: 100px;"/>
+    </div>
     </div>
 </div>
 
@@ -204,6 +215,28 @@
         registerDetailsForm.style.display = 'block';
     });
 
+   // Add event listener for OTP form submission
+    document.getElementById('otp-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Hide forms and display user profile
+        hideGroup('group1');
+        hideGroup('group2');
+        displayUserProfile(); // Function to populate and show the user profile
+    });
+
+    function displayUserProfile() {
+        // Dummy data for user profile, replace with real data as needed
+        document.getElementById('user-last-name').textContent = 'Doe';
+        document.getElementById('user-first-name').textContent = 'John';
+        document.getElementById('user-email').textContent = 'john.doe@example.com';
+        document.getElementById('user-dob').textContent = '1990-01-01';
+        document.getElementById('user-role').textContent = 'Member';
+        document.getElementById('user-status').textContent = 'Active';
+        document.getElementById('user-description').textContent = 'A brief description here.';
+        document.getElementById('user-profile-pic').src = 'path_to_profile_pic.jpg'; // Update the path to the profile picture
+
+        document.getElementById('user-profile').style.display = 'block';
+    }
     window.onclick = function(event) {
         if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
             dropdown.style.display = 'none';
