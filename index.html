@@ -11,7 +11,16 @@
     font-family: 'Arial', sans-serif;
     background: url('cat.jpg') no-repeat center center fixed; 
     background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
   }
+
+  /* Media query for mobile devices */
+@media (max-width: 600px) {
+  body, html {
+    background-size: contain; /* Make sure the entire image is visible */
+    background-position: top center; /* Adjust position if needed */
+  }
+}
   .navbar {
     overflow: hidden;
     background-color: #333;
