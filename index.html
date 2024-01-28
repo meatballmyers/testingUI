@@ -17,7 +17,7 @@
     top: 0;
     width: 100%;
   }
-  .navbar a, .navbar button {
+  .navbar a, .navbar .hamburger {
     display: block;
     color: #f2f2f2;
     text-align: center;
@@ -27,20 +27,24 @@
     border-radius: 4px; /* Optional: if you want rounded corners */
     transition: all 0.3s; /* Smooth transition for hover effect */
   }
-  .navbar a:hover, .navbar button:hover {
+  .navbar .hamburger {
+    float: right;
+    cursor: pointer;
+    padding: 14px 16px;
+  }
+  .navbar a:hover, .navbar .hamburger:hover {
     border-color: #ddd; /* Border color on hover */
   }
-  .navbar button {
-    background-color: #333; /* Match the background color of the navbar */
-    cursor: pointer;
-  }
-  .navbar a.right, .navbar button.right {
-    float: right;
-    width: 10%; /* Set the width of the Log In button */
-  }
-  .navbar a.left, .navbar button.left {
+  .navbar a.left, .navbar .hamburger.left {
     float: left;
     width: 20%; /* Set the width of the Other Functions button */
+  }
+  .bar {
+    width: 35px; /* Width of the bars */
+    height: 5px; /* Height of the bars */
+    background-color: #f2f2f2;
+    margin: 6px 0;
+    transition: 0.4s;
   }
   .main {
     margin-top: 50px; /* Add a top margin to avoid content overlay */
@@ -49,9 +53,13 @@
   }
   /* Responsive layout - when the screen is less than 600px wide, make the navigation links stack on top of each other instead of next to each other */
   @media screen and (max-width: 600px) {
-    .navbar a, .navbar button {
+    .navbar a, .navbar .hamburger {
       float: none;
       width: auto; /* Reset width for small screens */
+      padding: 10px 20px;
+    }
+    .navbar .hamburger {
+      padding: 10px 20px;
     }
   }
   /* Hide the login/register container by default */
@@ -66,6 +74,7 @@
   #login-register-container button {
     width: 100%; /* Full width */
     text-align: left; /* Align text to the left */
+    padding: 10px 20px;
   }
 </style>
 </head>
@@ -73,7 +82,11 @@
 
 <div class="navbar">
   <a href="#other" class="left">Other Functions</a>
-  <button class="right" id="login-btn">Log In</button>
+  <div class="hamburger right" id="login-btn">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
 </div>
 
 <div id="login-register-container">
@@ -88,14 +101,14 @@
 </div>
 
 <script>
-  // Get the login button by its ID
-  var loginButton = document.getElementById('login-btn');
+  // Get the hamburger menu button by its ID
+  var hamburger = document.getElementById('login-btn');
 
   // Get the login/register container
   var loginRegisterContainer = document.getElementById('login-register-container');
 
-  // Add a click event listener to the login button
-  loginButton.addEventListener('click', function() {
+  // Add a click event listener to the hamburger menu
+  hamburger.addEventListener('click', function() {
     // Toggle the display of the login/register container
     loginRegisterContainer.style.display = loginRegisterContainer.style.display === 'block' ? 'none' : 'block';
   });
