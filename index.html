@@ -162,41 +162,51 @@
   var loginForm = document.getElementById('login-form');
   var showOtpButton = document.getElementById('show-otp');
   var otpForm = document.getElementById('otp-form');
+  var registerButton = document.getElementById('register'); // Get the register button
 
   // Toggle dropdown visibility
   menuButton.addEventListener('click', function() {
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    // Reset forms visibility
-    loginForm.classList.remove('active');
-    otpForm.classList.remove('active');
+    // Reset forms and register button visibility
+    loginForm.style.display = 'none';
+    otpForm.style.display = 'none';
+    registerButton.style.display = 'block'; // Show register button when hamburger is clicked
   });
 
-  // Show login form
+  // Show login form and hide register button
   showLoginFormButton.addEventListener('click', function() {
-    loginForm.classList.add('active');
-    otpForm.classList.remove('active');
+    loginForm.style.display = 'block';
+    otpForm.style.display = 'none';
+    registerButton.style.display = 'none'; // Hide register button when login is clicked
   });
 
   // Show OTP form
   showOtpButton.addEventListener('click', function() {
-    otpForm.classList.add('active');
-    loginForm.classList.remove('active');
+    otpForm.style.display = 'block';
+    loginForm.style.display = 'none';
   });
 
   // Submit OTP form
   otpForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    // Handle OTP submission here
     alert('OTP Submitted: ' + document.getElementById('otp').value);
+    // After OTP is submitted, hide the otp form and show the register button again
+    otpForm.style.display = 'none';
+    registerButton.style.display = 'block';
   });
 
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
     if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
       dropdown.style.display = 'none';
+      // Reset register button and forms visibility
+      registerButton.style.display = 'block';
+      loginForm.style.display = 'none';
+      otpForm.style.display = 'none';
     }
   };
 </script>
+
 
 </body>
 </html>
