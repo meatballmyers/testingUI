@@ -225,23 +225,23 @@
         hideAllForms();
     });
 
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
-            dropdown.style.display = 'none';
-            hideAllForms();
-            // Reset button visibility
-            showLoginFormButton.style.display = 'block';
-            showRegisterButton.style.display = 'block';
-        }
-    };
-
-    function hideAllForms() {
-        var forms = document.getElementsByClassName('form');
-        for (var i = 0; i < forms.length; i++) {
-            forms[i].style.display = 'none';
-        }
+// Close the dropdown and hide all forms if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
+        dropdown.style.display = 'none';
+        hideAllForms();
+        // Reset button visibility
+        showLoginFormButton.style.display = 'block';
+        showRegisterButton.style.display = 'block';
     }
+};
+
+function hideAllForms() {
+    var forms = document.getElementsByClassName('form');
+    for (var i = 0; i < forms.length; i++) {
+        forms[i].style.display = 'none';
+    }
+}
 });
 
 </script>
