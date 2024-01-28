@@ -164,7 +164,7 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
     var menuButton = document.getElementById('menu-btn');
     var dropdown = document.getElementById('myDropdown');
     var showLoginFormButton = document.getElementById('show-login');
@@ -178,11 +178,14 @@
 
     menuButton.addEventListener('click', function() {
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        // Reset the visibility of login and register buttons when menu is toggled
+        resetButtonVisibility();
     });
 
     showLoginFormButton.addEventListener('click', function() {
         hideGroup('group2');
         loginForm.style.display = 'block';
+        showRegisterButton.style.display = 'none'; // Hide the register button
     });
 
     showOtpButton.addEventListener('click', function() {
@@ -193,6 +196,7 @@
     showRegisterButton.addEventListener('click', function() {
         hideGroup('group1');
         registerEmailForm.style.display = 'block';
+        showLoginFormButton.style.display = 'none'; // Hide the login button
     });
 
     showDetailsFormButton.addEventListener('click', function() {
@@ -205,6 +209,7 @@
             dropdown.style.display = 'none';
             hideGroup('group1');
             hideGroup('group2');
+            resetButtonVisibility();
         }
     };
 
@@ -213,6 +218,11 @@
         elements.forEach(function(element) {
             element.style.display = 'none';
         });
+    }
+
+    function resetButtonVisibility() {
+        showLoginFormButton.style.display = 'block';
+        showRegisterButton.style.display = 'block';
     }
 });
 
