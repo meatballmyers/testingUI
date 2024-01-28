@@ -125,122 +125,79 @@
 <body>
 
 <div class="navbar">
-  <a href="#other" class="left">Other Functions</a>
-  <div class="hamburger" id="menu-btn">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-  <div class="dropdown" id="myDropdown">
-    <!-- Login button inside the dropdown -->
-    <button id="show-login">Login</button>
-    <!-- Register button inside the dropdown -->
-    <button id="show-register">Register</button>
-    <!-- Form for Email Input -->
-    <form id="login-form">
-      <input type="email" placeholder="Enter Email" id="email">
-      <button type="button" id="show-otp">Go</button>
-    </form>
-    <!-- Form for OTP Input -->
-    <form id="otp-form">
-      <input type="text" placeholder="Enter OTP" id="otp">
-      <button type="submit" id="submit-otp">Submit</button>
-    </form>
-    <!-- Registration Email Form -->
-    <form id="register-email-form" class="form">
-      <input type="email" placeholder="Enter Email" id="register-email">
-      <button type="button" id="show-details-form">Submit</button>
-    </form>
-    <!-- Registration Details Form -->
-    <form id="register-details-form" class="form">
-      <input type="text" placeholder="First Name" id="first-name">
-      <input type="text" placeholder="Last Name" id="last-name">
-      <input type="date" id="dob">
-      <button type="submit" id="finalize-registration">Submit</button>
-    </form>
-  </div>
+    <a href="#other" class="left">Other Functions</a>
+    <div class="hamburger" id="menu-btn">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="dropdown" id="myDropdown">
+        <!-- Group 1: Login-related elements -->
+        <button id="show-login">Login</button>
+        <form id="login-form" class="group1">
+            <input type="email" placeholder="Enter Email" id="email">
+            <button type="button" id="show-otp">Go</button>
+        </form>
+        <form id="otp-form" class="group1">
+            <input type="text" placeholder="Enter OTP" id="otp">
+            <button type="submit" id="submit-otp">Submit</button>
+        </form>
+
+        <!-- Group 2: Registration-related elements -->
+        <button id="show-register">Register</button>
+        <form id="register-email-form" class="group2">
+            <input type="email" placeholder="Enter Email" id="register-email">
+            <button type="button" id="show-details-form">Submit</button>
+        </form>
+        <form id="register-details-form" class="group2">
+            <input type="text" placeholder="First Name" id="first-name">
+            <input type="text" placeholder="Last Name" id="last-name">
+            <input type="date" id="dob">
+            <button type="submit" id="finalize-registration">Submit</button>
+        </form>
+    </div>
 </div>
 
 <div class="main">
-  <h1 class="neon-text">Welcome to The Musicali</h1>
-  <p class="neon-text">This is the main page content.</p>
+    <h1 class="neon-text">Welcome to The Musicali</h1>
+    <p class="neon-text">This is the main page content.</p>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var menuButton = document.getElementById('menu-btn');
-    var dropdown = document.getElementById('myDropdown');
-    var showLoginFormButton = document.getElementById('show-login');
-    var loginForm = document.getElementById('login-form');
-    var showOtpButton = document.getElementById('show-otp');
-    var otpForm = document.getElementById('otp-form');
-    var showRegisterButton = document.getElementById('show-register'); // Corrected ID
-    var registerEmailForm = document.getElementById('register-email-form');
-    var showDetailsFormButton = document.getElementById('show-details-form');
-    var registerDetailsForm = document.getElementById('register-details-form');
+    document.addEventListener('DOMContentLoaded', function() {
+        var menuButton = document.getElementById('menu-btn');
+        var dropdown = document.getElementById('myDropdown');
+        var showLoginFormButton = document.getElementById('show-login');
+        var showRegisterButton = document.getElementById('show-register');
+        var group1Elements = document.querySelectorAll('.group1');
+        var group2Elements = document.querySelectorAll('.group2');
 
-    // Toggle dropdown visibility
-    menuButton.addEventListener('click', function() {
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        hideAllForms();
-    });
+        menuButton.addEventListener('click', function() {
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
 
-    // Show login form
-    showLoginFormButton.addEventListener('click', function() {
-        hideAllForms();
-        loginForm.style.display = 'block';
-    });
+        showLoginFormButton.addEventListener('click', function() {
+            hideAllElements(group2Elements);
+            group1Elements.forEach(element => element.style.display = 'block');
+        });
 
-    // Show OTP form
-    showOtpButton.addEventListener('click', function() {
-        hideAllForms();
-        otpForm.style.display = 'block';
-    });
+        showRegisterButton.addEventListener('click', function() {
+            hideAllElements(group1Elements);
+            group2Elements.forEach(element => element.style.display = 'block');
+        });
 
-    // Submit OTP form
-    otpForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('OTP Submitted: ' + document.getElementById('otp').value);
-        hideAllForms();
-    });
+        window.onclick = function(event) {
+            if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
+                dropdown.style.display = 'none';
+            }
+        };
 
-    // Show register email form
-    showRegisterButton.addEventListener('click', function() {
-        hideAllForms();
-        registerEmailForm.style.display = 'block';
-    });
-
-    // Show register details form
-    showDetailsFormButton.addEventListener('click', function() {
-        hideAllForms();
-        registerDetailsForm.style.display = 'block';
-    });
-
-    // Submit register details form
-    registerDetailsForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('Registration Submitted');
-        hideAllForms();
-    });
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
-            dropdown.style.display = 'none';
-            hideAllForms();
+        function hideAllElements(elements) {
+            elements.forEach(element => element.style.display = 'none');
         }
-    };
-
-    function hideAllForms() {
-        var forms = document.getElementsByClassName('form');
-        for (var i = 0; i < forms.length; i++) {
-            forms[i].style.display = 'none';
-        }
-    }
-});
-
+    });
 </script>
 
-
 </body>
+</html>
 </html>
