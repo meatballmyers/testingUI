@@ -167,77 +167,78 @@
 </div>
 
 <script>
-  // Get all the necessary elements
-  var menuButton = document.getElementById('menu-btn');
-  var dropdown = document.getElementById('myDropdown');
-  var showLoginFormButton = document.getElementById('show-login');
-  var loginForm = document.getElementById('login-form');
-  var showOtpButton = document.getElementById('show-otp');
-  var otpForm = document.getElementById('otp-form');
-  var registerButton = document.getElementById('register'); // Get the register button
-  var showRegisterButton = document.getElementById('show-register');
-  var registerEmailForm = document.getElementById('register-email-form');
-  var showDetailsFormButton = document.getElementById('show-details-form');
-  var registerDetailsForm = document.getElementById('register-details-form');
-  // Toggle dropdown visibility
-  menuButton.addEventListener('click', function() {
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    // Reset forms and register button visibility
-    loginForm.style.display = 'none';
-    otpForm.style.display = 'none';
-    registerButton.style.display = 'block'; // Show register button when hamburger is clicked
-  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var menuButton = document.getElementById('menu-btn');
+    var dropdown = document.getElementById('myDropdown');
+    var showLoginFormButton = document.getElementById('show-login');
+    var loginForm = document.getElementById('login-form');
+    var showOtpButton = document.getElementById('show-otp');
+    var otpForm = document.getElementById('otp-form');
+    var showRegisterButton = document.getElementById('show-register'); // Corrected ID
+    var registerEmailForm = document.getElementById('register-email-form');
+    var showDetailsFormButton = document.getElementById('show-details-form');
+    var registerDetailsForm = document.getElementById('register-details-form');
 
-  // Show login form and hide register button
-  showLoginFormButton.addEventListener('click', function() {
-    loginForm.style.display = 'block';
-    otpForm.style.display = 'none';
-    registerButton.style.display = 'none'; // Hide register button when login is clicked
-  });
+    // Toggle dropdown visibility
+    menuButton.addEventListener('click', function() {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        hideAllForms();
+    });
 
-  // Show OTP form
-  showOtpButton.addEventListener('click', function() {
-    otpForm.style.display = 'block';
-    loginForm.style.display = 'none';
-  });
+    // Show login form
+    showLoginFormButton.addEventListener('click', function() {
+        hideAllForms();
+        loginForm.style.display = 'block';
+    });
 
-  // Submit OTP form
-  otpForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    alert('OTP Submitted: ' + document.getElementById('otp').value);
-    // After OTP is submitted, hide the otp form and show the register button again
-    otpForm.style.display = 'none';
-    registerButton.style.display = 'block';
-  });
+    // Show OTP form
+    showOtpButton.addEventListener('click', function() {
+        hideAllForms();
+        otpForm.style.display = 'block';
+    });
 
-  showRegisterButton.addEventListener('click', function() {
-    // Show the email form for registration
-    hideAllForms();
-    registerEmailForm.style.display = 'block';
-  });
+    // Submit OTP form
+    otpForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('OTP Submitted: ' + document.getElementById('otp').value);
+        hideAllForms();
+    });
 
-  showDetailsFormButton.addEventListener('click', function() {
-    // Show the details form for registration
-    registerEmailForm.style.display = 'none';
-    registerDetailsForm.style.display = 'block';
-  });
+    // Show register email form
+    showRegisterButton.addEventListener('click', function() {
+        hideAllForms();
+        registerEmailForm.style.display = 'block';
+    });
 
-  registerDetailsForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Handle the final registration submission here
-    alert('Registration Submitted');
-    registerDetailsForm.style.display = 'none';
-  });
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
-      dropdown.style.display = 'none';
-      // Reset register button and forms visibility
-      registerButton.style.display = 'block';
-      loginForm.style.display = 'none';
-      otpForm.style.display = 'none';
+    // Show register details form
+    showDetailsFormButton.addEventListener('click', function() {
+        hideAllForms();
+        registerDetailsForm.style.display = 'block';
+    });
+
+    // Submit register details form
+    registerDetailsForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('Registration Submitted');
+        hideAllForms();
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
+            dropdown.style.display = 'none';
+            hideAllForms();
+        }
+    };
+
+    function hideAllForms() {
+        var forms = document.getElementsByClassName('form');
+        for (var i = 0; i < forms.length; i++) {
+            forms[i].style.display = 'none';
+        }
     }
-  };
+});
+
 </script>
 
 
