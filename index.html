@@ -155,47 +155,67 @@
 </div>
 
 <script>
-  // Get all the necessary elements
-  var menuButton = document.getElementById('menu-btn');
+  document.getElementById('menu-btn').addEventListener('click', function() {
+  // Toggle the dropdown menu
   var dropdown = document.getElementById('myDropdown');
-  var showLoginFormButton = document.getElementById('show-login');
-  var loginForm = document.getElementById('login-form');
-  var showOtpButton = document.getElementById('show-otp');
-  var otpForm = document.getElementById('otp-form');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+});
 
-  // Toggle dropdown visibility
-  menuButton.addEventListener('click', function() {
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    // Reset forms visibility
-    loginForm.classList.remove('active');
-    otpForm.classList.remove('active');
-  });
+// Get the login and register buttons
+var loginButton = document.getElementById('login');
+var registerButton = document.getElementById('register');
 
-  // Show login form
-  showLoginFormButton.addEventListener('click', function() {
-    loginForm.classList.add('active');
-    otpForm.classList.remove('active');
-  });
+// Get the login form and other elements
+var loginForm = document.getElementById('login-form');
+var emailInput = document.getElementById('email');
+var goButton = document.getElementById('show-otp');
+var otpForm = document.getElementById('otp-form');
 
-  // Show OTP form
-  showOtpButton.addEventListener('click', function() {
-    otpForm.classList.add('active');
-    loginForm.classList.remove('active');
-  });
+// Event listener for the login button
+loginButton.addEventListener('click', function() {
+  // Show the email input and go button
+  loginForm.style.display = 'block';
+  // Hide the register button
+  registerButton.style.display = 'none';
+  // Hide the dropdown menu
+  document.getElementById('myDropdown').style.display = 'none';
+});
 
-  // Submit OTP form
-  otpForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Handle OTP submission here
-    alert('OTP Submitted: ' + document.getElementById('otp').value);
-  });
+// Add event listener for the go button to show OTP input
+goButton.addEventListener('click', function() {
+  // Show OTP form and hide login form
+  otpForm.style.display = 'block';
+  loginForm.style.display = 'none';
+});
 
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
-      dropdown.style.display = 'none';
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
+    var dropdowns = document.getElementsByClassName('dropdown');
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.style.display === 'block') {
+        openDropdown.style.display = 'none';
+      }
     }
-  };
+    // Also reset the register button display when clicking outside
+    registerButton.style.display = 'block';
+    // Hide the forms when clicking outside
+    loginForm.style.display = 'none';
+    otpForm.style.display = 'none';
+  }
+};
+
+// Event listener for OTP form submission (example, you need to implement actual logic)
+otpForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  alert('OTP submitted: ' + document.getElementById('otp').value);
+  // Reset the dropdown and forms
+  otpForm.style.display = 'none';
+  registerButton.style.display = 'block';
+  dropdown.style.display = 'none';
+});
+
 </script>
 
 </body>
