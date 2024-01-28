@@ -18,15 +18,14 @@
     width: 100%;
   }
   .navbar a, .navbar button {
-    float: left;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 14px;
     text-decoration: none;
     border: 2px solid transparent; /* Add border to the buttons */
     border-radius: 4px; /* Optional: if you want rounded corners */
-    transition: border-color 0.3s; /* Smooth transition for hover effect */
+    transition: all 0.3s; /* Smooth transition for hover effect */
   }
   .navbar a:hover, .navbar button:hover {
     border-color: #ddd; /* Border color on hover */
@@ -37,6 +36,11 @@
   }
   .navbar a.right, .navbar button.right {
     float: right;
+    width: 10%; /* Set the width of the Log In button */
+  }
+  .navbar a.left, .navbar button.left {
+    float: left;
+    width: 20%; /* Set the width of the Other Functions button */
   }
   .main {
     margin-top: 50px; /* Add a top margin to avoid content overlay */
@@ -47,8 +51,7 @@
   @media screen and (max-width: 600px) {
     .navbar a, .navbar button {
       float: none;
-      display: block;
-      text-align: left;
+      width: auto; /* Reset width for small screens */
     }
   }
   /* Hide the login/register container by default */
@@ -69,7 +72,7 @@
 <body>
 
 <div class="navbar">
-  <a href="#other" class="active">Other Functions</a>
+  <a href="#other" class="left">Other Functions</a>
   <button class="right" id="login-btn">Log In</button>
 </div>
 
