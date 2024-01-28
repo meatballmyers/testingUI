@@ -63,7 +63,18 @@
     font-size: 2em;
     text-align: center;
   }
-
+.dropdown {
+  display: none;
+  position: fixed;
+  left: 50%; /* Position the left edge of the dropdown at the center of the screen */
+  top: 58px; /* Below the hamburger menu */
+  width: 50%; /* Set the width of the dropdown to be 50% of the screen width */
+  transform: translateX(-50%); /* Shift the dropdown back to the left by half its width */
+  background-color: #333;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
 .dropdown form {
     display: none;
     padding: 12px;
