@@ -92,39 +92,6 @@
     background-color: #ddd;
     color: black;
   }
-.dropdown-content {
-    display: none;
-    position: fixed;
-    right: 10px;
-    top: 58px; /* Adjusted to the height of the navbar */
-    background-color: #333;
-    border-radius: 4px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    padding: 12px;
-    z-index: 1;
-  }
-
-  .dropdown-content input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-
-  .dropdown-content button {
-    width: 100%;
-    padding: 10px;
-    background-color: #1e9bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .dropdown-content button:hover {
-    background-color: #0a3f6e;
-  }
 
   .main {
     margin-top: 50px;
@@ -145,10 +112,14 @@
 
 <div class="navbar">
   <a href="#other" class="left">Other Functions</a>
-  <button class="hamburger" id="login-btn">Login</button>
-  <div class="dropdown-content" id="login-dropdown">
-    <input type="email" placeholder="Enter Email" id="email">
-    <button id="go">Go</button>
+  <div class="hamburger" id="menu-btn">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="dropdown" id="myDropdown">
+    <button id="login">Login</button>
+    <button id="register">Register</button>
   </div>
 </div>
 
@@ -158,17 +129,24 @@
 </div>
 
 <script>
-  document.getElementById('login-btn').addEventListener('click', function() {
-    var dropdown = document.getElementById('login-dropdown');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  document.getElementById('menu-btn').addEventListener('click', function() {
+    var dropdown = document.getElementById('myDropdown');
+    if (dropdown.style.display === 'block') {
+      dropdown.style.display = 'none';
+    } else {
+      dropdown.style.display = 'block';
+    }
   });
 
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
-    if (!event.target.matches('#login-btn')) {
-      var dropdown = document.getElementById('login-dropdown');
-      if (dropdown.style.display === 'block') {
-        dropdown.style.display = 'none';
+    if (!event.target.matches('.hamburger, .bar')) {
+      var dropdowns = document.getElementsByClassName('dropdown');
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.style.display === 'block') {
+          openDropdown.style.display = 'none';
+        }
       }
     }
   };
