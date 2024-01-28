@@ -164,7 +164,7 @@
 </div>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     var menuButton = document.getElementById('menu-btn');
     var dropdown = document.getElementById('myDropdown');
     var showLoginFormButton = document.getElementById('show-login');
@@ -175,42 +175,44 @@
     var registerEmailForm = document.getElementById('register-email-form');
     var showDetailsFormButton = document.getElementById('show-details-form');
     var registerDetailsForm = document.getElementById('register-details-form');
-    var group1Elements = document.querySelectorAll('.group1');
 
     menuButton.addEventListener('click', function() {
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
 
     showLoginFormButton.addEventListener('click', function() {
-        hideAllElements(group1Elements);
+        hideGroup('group2');
         loginForm.style.display = 'block';
-        otpForm.style.display = 'none';
     });
 
     showOtpButton.addEventListener('click', function() {
+        hideGroup('group2');
         otpForm.style.display = 'block';
-        loginForm.style.display = 'none';
     });
 
     showRegisterButton.addEventListener('click', function() {
-        hideAllElements(document.querySelectorAll('.group1'));
+        hideGroup('group1');
         registerEmailForm.style.display = 'block';
-        registerDetailsForm.style.display = 'none';
     });
 
     showDetailsFormButton.addEventListener('click', function() {
+        hideGroup('group1');
         registerDetailsForm.style.display = 'block';
-        registerEmailForm.style.display = 'none';
     });
 
     window.onclick = function(event) {
         if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
             dropdown.style.display = 'none';
+            hideGroup('group1');
+            hideGroup('group2');
         }
     };
 
-    function hideAllElements(elements) {
-        elements.forEach(element => element.style.display = 'none');
+    function hideGroup(groupName) {
+        var elements = document.querySelectorAll('.' + groupName);
+        elements.forEach(function(element) {
+            element.style.display = 'none';
+        });
     }
 });
 
