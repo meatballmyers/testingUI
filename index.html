@@ -173,26 +173,34 @@
     var otpForm = document.getElementById('otp-form');
     var showRegisterButton = document.getElementById('show-register');
     var registerEmailForm = document.getElementById('register-email-form');
-    var group2Elements = document.querySelectorAll('.group2');
+    var showDetailsFormButton = document.getElementById('show-details-form');
+    var registerDetailsForm = document.getElementById('register-details-form');
+    var group1Elements = document.querySelectorAll('.group1');
 
     menuButton.addEventListener('click', function() {
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
 
     showLoginFormButton.addEventListener('click', function() {
-        hideAllElements(group2Elements);
-        loginForm.style.display = 'block'; // Show only the email input
-        otpForm.style.display = 'none'; // Hide OTP form initially
+        hideAllElements(group1Elements);
+        loginForm.style.display = 'block';
+        otpForm.style.display = 'none';
     });
 
     showOtpButton.addEventListener('click', function() {
-        otpForm.style.display = 'block'; // Show OTP form when 'Go' is clicked
-        loginForm.style.display = 'none'; // Optionally hide email input
+        otpForm.style.display = 'block';
+        loginForm.style.display = 'none';
     });
 
     showRegisterButton.addEventListener('click', function() {
         hideAllElements(document.querySelectorAll('.group1'));
         registerEmailForm.style.display = 'block';
+        registerDetailsForm.style.display = 'none';
+    });
+
+    showDetailsFormButton.addEventListener('click', function() {
+        registerDetailsForm.style.display = 'block';
+        registerEmailForm.style.display = 'none';
     });
 
     window.onclick = function(event) {
@@ -205,6 +213,7 @@
         elements.forEach(element => element.style.display = 'none');
     }
 });
+
 </script>
 
 </body>
