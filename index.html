@@ -174,7 +174,7 @@
     var loginForm = document.getElementById('login-form');
     var showOtpButton = document.getElementById('show-otp');
     var otpForm = document.getElementById('otp-form');
-    var showRegisterButton = document.getElementById('show-register');
+    var showRegisterButton = document.getElementById('show-register'); // Corrected ID
     var registerEmailForm = document.getElementById('register-email-form');
     var showDetailsFormButton = document.getElementById('show-details-form');
     var registerDetailsForm = document.getElementById('register-details-form');
@@ -185,11 +185,10 @@
         hideAllForms();
     });
 
-    // Show login form and hide register button
+    // Show login form
     showLoginFormButton.addEventListener('click', function() {
         hideAllForms();
         loginForm.style.display = 'block';
-        showRegisterButton.style.display = 'none'; // Hide register button
     });
 
     // Show OTP form
@@ -205,11 +204,10 @@
         hideAllForms();
     });
 
-    // Show register email form and hide login button
+    // Show register email form
     showRegisterButton.addEventListener('click', function() {
         hideAllForms();
         registerEmailForm.style.display = 'block';
-        showLoginFormButton.style.display = 'none'; // Hide login button
     });
 
     // Show register details form
@@ -230,9 +228,6 @@
         if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
             dropdown.style.display = 'none';
             hideAllForms();
-            // Reset button visibility
-            showLoginFormButton.style.display = 'block';
-            showRegisterButton.style.display = 'block';
         }
     };
 
