@@ -164,38 +164,47 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var menuButton = document.getElementById('menu-btn');
-        var dropdown = document.getElementById('myDropdown');
-        var showLoginFormButton = document.getElementById('show-login');
-        var showRegisterButton = document.getElementById('show-register');
-        var group1Elements = document.querySelectorAll('.group1');
-        var group2Elements = document.querySelectorAll('.group2');
+   document.addEventListener('DOMContentLoaded', function() {
+    var menuButton = document.getElementById('menu-btn');
+    var dropdown = document.getElementById('myDropdown');
+    var showLoginFormButton = document.getElementById('show-login');
+    var loginForm = document.getElementById('login-form');
+    var showOtpButton = document.getElementById('show-otp');
+    var otpForm = document.getElementById('otp-form');
+    var showRegisterButton = document.getElementById('show-register');
+    var registerEmailForm = document.getElementById('register-email-form');
+    var group2Elements = document.querySelectorAll('.group2');
 
-        menuButton.addEventListener('click', function() {
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
-
-        showLoginFormButton.addEventListener('click', function() {
-            hideAllElements(group2Elements);
-            group1Elements.forEach(element => element.style.display = 'block');
-        });
-
-        showRegisterButton.addEventListener('click', function() {
-            hideAllElements(group1Elements);
-            group2Elements.forEach(element => element.style.display = 'block');
-        });
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
-                dropdown.style.display = 'none';
-            }
-        };
-
-        function hideAllElements(elements) {
-            elements.forEach(element => element.style.display = 'none');
-        }
+    menuButton.addEventListener('click', function() {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
+
+    showLoginFormButton.addEventListener('click', function() {
+        hideAllElements(group2Elements);
+        loginForm.style.display = 'block'; // Show only the email input
+        otpForm.style.display = 'none'; // Hide OTP form initially
+    });
+
+    showOtpButton.addEventListener('click', function() {
+        otpForm.style.display = 'block'; // Show OTP form when 'Go' is clicked
+        loginForm.style.display = 'none'; // Optionally hide email input
+    });
+
+    showRegisterButton.addEventListener('click', function() {
+        hideAllElements(document.querySelectorAll('.group1'));
+        registerEmailForm.style.display = 'block';
+    });
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
+            dropdown.style.display = 'none';
+        }
+    };
+
+    function hideAllElements(elements) {
+        elements.forEach(element => element.style.display = 'none');
+    }
+});
 </script>
 
 </body>
