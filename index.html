@@ -181,13 +181,14 @@
 
     // Toggle dropdown visibility
     menuButton.addEventListener('click', function() {
-        dropdown.style.display = (dropdown.style.display === 'block' ? 'none' : 'block');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        hideAllForms();
     });
 
     // Show login form and hide register button
     showLoginFormButton.addEventListener('click', function() {
         hideAllForms();
-        loginForm.classList.add('active');
+        loginForm.style.display = 'block';
         showRegisterButton.style.display = 'none'; // Hide register button
     });
 
@@ -224,21 +225,22 @@
         hideAllForms();
     });
 
-// Close the dropdown if the user clicks outside of it
+    // Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
         if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
-            dropdown.style.display = 'none'; // Hide dropdown but maintain its state
+            dropdown.style.display = 'none';
+            hideAllForms();
+            // Reset button visibility
+            showLoginFormButton.style.display = 'block';
+            showRegisterButton.style.display = 'block';
         }
     };
 
     function hideAllForms() {
         var forms = document.getElementsByClassName('form');
         for (var i = 0; i < forms.length; i++) {
-            forms[i].classList.remove('active');
+            forms[i].style.display = 'none';
         }
-        // Reset button visibility when hiding forms
-        showLoginFormButton.style.display = 'block';
-        showRegisterButton.style.display = 'block';
     }
 });
 
