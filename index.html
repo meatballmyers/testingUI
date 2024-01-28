@@ -9,32 +9,37 @@
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: url('background.png') no-repeat center center fixed; 
+   background: url('background.png') no-repeat center center fixed; 
     background-size: cover; /* Cover the entire page */
   }
-  #login-register-container {
-    display: none;
-    position: fixed; /* Positioned relative to the viewport */
-    right: 0; /* Right aligned */
-    top: 10px; /* Adjusted to be at the top of the page */
-    background-color: #333; /* Dark background for the container */
-    border-radius: 0 0 0 4px; /* Rounded bottom left corner */
-    padding: 10px;
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
-  #login-register-container button {
-    width: 100%; /* Full width */
-    text-align: left; /* Align text to the left */
-    padding: 10px 20px;
+  .navbar a, .navbar .hamburger {
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    border: 2px solid transparent; /* Add border to the buttons */
+    border-radius: 4px; /* Optional: if you want rounded corners */
+    transition: all 0.3s; /* Smooth transition for hover effect */
   }
-  .main {
-    padding: 16px;
-    height: 1500px; /* Used for demonstration */
+  .navbar .hamburger {
+    float: right;
+    cursor: pointer;
+    padding: 14px 16px;
   }
-  .hamburger {
-    position: fixed; /* Fixed position */
-    top: 10px; /* Adjusted to be at the top right corner */
-    right: 10px; /* Adjusted to be at the top right corner */
-    z-index: 1000; /* Ensures it's above other elements */
+  .navbar a:hover, .navbar .hamburger:hover {
+    border-color: #ddd; /* Border color on hover */
+  }
+  .navbar a.left, .navbar .hamburger.left {
+    float: left;
+    width: 20%; /* Set the width of the Other Functions button */
   }
   .bar {
     width: 35px; /* Width of the bars */
@@ -43,19 +48,52 @@
     margin: 6px 0;
     transition: 0.4s;
   }
+  .main {
+    margin-top: 50px; /* Add a top margin to avoid content overlay */
+    padding: 16px;
+    height: 1500px; /* Used for demonstration */
+  }
+  /* Responsive layout - when the screen is less than 600px wide, make the navigation links stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .navbar a, .navbar .hamburger {
+      float: none;
+      width: auto; /* Reset width for small screens */
+      padding: 10px 20px;
+    }
+    .navbar .hamburger {
+      padding: 10px 20px;
+    }
+  }
+  /* Hide the login/register container by default */
+  #login-register-container {
+    display: none;
+    position: fixed; /* Positioned relative to the viewport */
+    right: 0; /* Right aligned */
+    top: 50px; /* Below the navbar */
+    background-color: #333; /* Match the navbar color */
+    border-radius: 0 0 0 4px; /* Rounded bottom left corner */
+  }
+  #login-register-container button {
+    width: 100%; /* Full width */
+    text-align: left; /* Align text to the left */
+    padding: 10px 20px;
+  }
 </style>
 </head>
 <body>
 
-<div class="hamburger" id="login-btn">
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
+<div class="navbar">
+  <a href="#other" class="left">Other Functions</a>
+  <div class="hamburger right" id="login-btn">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
 </div>
 
 <div id="login-register-container">
-  <button class="btn" id="login">Login</button>
-  <button class="btn" id="register">Register</button>
+  <button class="btn right" id="login">Login</button>
+  <button class="btn right" id="register">Register</button>
 </div>
 
 <div class="main">
