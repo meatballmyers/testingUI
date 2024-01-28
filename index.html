@@ -133,7 +133,7 @@
   </div>
   <div class="dropdown" id="myDropdown">
     <!-- Login button inside the dropdown -->
-    <button id="show-login">Login</button>
+    <button id="login">Login</button>
     <!-- Register button inside the dropdown -->
     <button id="register">Register</button>
     <!-- Form for Email Input -->
@@ -156,66 +156,52 @@
 
 <script>
   document.getElementById('menu-btn').addEventListener('click', function() {
-  // Toggle the dropdown menu
-  var dropdown = document.getElementById('myDropdown');
-  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-});
+    document.getElementById('myDropdown').classList.toggle('show');
+  });
 
-// Get the login and register buttons
-var loginButton = document.getElementById('login');
-var registerButton = document.getElementById('register');
+  // Get the login and register buttons and forms
+  var loginButton = document.getElementById('login');
+  var registerButton = document.getElementById('register');
+  var loginForm = document.getElementById('login-form');
+  var showOtpButton = document.getElementById('show-otp');
+  var otpForm = document.getElementById('otp-form');
 
-// Get the login form and other elements
-var loginForm = document.getElementById('login-form');
-var emailInput = document.getElementById('email');
-var goButton = document.getElementById('show-otp');
-var otpForm = document.getElementById('otp-form');
+  // When the login button is clicked, show the login form and hide the register button
+  loginButton.addEventListener('click', function() {
+    loginForm.style.display = 'block';
+    registerButton.style.display = 'none';
+  });
 
-// Event listener for the login button
-loginButton.addEventListener('click', function() {
-  // Show the email input and go button
-  loginForm.style.display = 'block';
-  // Hide the register button
-  registerButton.style.display = 'none';
-  // Hide the dropdown menu
-  document.getElementById('myDropdown').style.display = 'none';
-});
-
-// Add event listener for the go button to show OTP input
-goButton.addEventListener('click', function() {
-  // Show OTP form and hide login form
-  otpForm.style.display = 'block';
-  loginForm.style.display = 'none';
-});
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.hamburger, .bar, .dropdown, .dropdown *')) {
-    var dropdowns = document.getElementsByClassName('dropdown');
-    for (var i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.style.display === 'block') {
-        openDropdown.style.display = 'none';
-      }
-    }
-    // Also reset the register button display when clicking outside
-    registerButton.style.display = 'block';
-    // Hide the forms when clicking outside
+  // When the 'Go' button next to the email input is clicked, show the OTP form
+  showOtpButton.addEventListener('click', function() {
+    otpForm.style.display = 'block';
     loginForm.style.display = 'none';
-    otpForm.style.display = 'none';
-  }
-};
+  });
 
-// Event listener for OTP form submission (example, you need to implement actual logic)
-otpForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-  alert('OTP submitted: ' + document.getElementById('otp').value);
-  // Reset the dropdown and forms
-  otpForm.style.display = 'none';
-  registerButton.style.display = 'block';
-  dropdown.style.display = 'none';
-});
+  // When the OTP form is submitted, you can handle the OTP verification here
+  otpForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Here you would verify the OTP
+    alert('OTP submitted: ' + document.getElementById('otp').value);
+    otpForm.style.display = 'none'; // Hide the OTP form after submission
+  });
 
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.hamburger, .bar')) {
+      var dropdowns = document.getElementsByClassName('dropdown');
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+      // Reset the visibility of the register button and forms
+      registerButton.style.display = 'block';
+      loginForm.style.display = 'none';
+      otpForm.style.display = 'none';
+    }
+  };
 </script>
 
 </body>
