@@ -182,6 +182,12 @@
             <input type="date" id="dob">
             <button type="submit" id="finalize-registration">Submit</button>
         </form>
+     <!-- Group 3: Recovery-related elements -->
+        <button id="show-recovery">Account Recovery</button>
+        <form id="recovery-form" class="group3">
+            <input type="email" placeholder="Enter Email" id="email">
+            <button type="button" id="show-recovery">Submit</button>             //check show-recovery
+        </form>
       <!-- User Profile Section, initially hidden -->
     <div id="user-profile" class="user-profile" style="display: none;">
         <p><strong>Last Name:</strong> <span id="user-last-name"></span></p>
@@ -212,6 +218,7 @@
     var menuButton = document.getElementById('menu-btn');
     var dropdown = document.getElementById('myDropdown');
     var showLoginFormButton = document.getElementById('show-login');
+    var showRecoveryFormButton = document.getElementById('show-recovery');
     var loginForm = document.getElementById('login-form');
     var showOtpButton = document.getElementById('show-otp');
     var otpForm = document.getElementById('otp-form');
@@ -228,24 +235,35 @@
 
     showLoginFormButton.addEventListener('click', function() {
         hideGroup('group2');
+        hideGroup('group3');
         loginForm.style.display = 'block';
         showRegisterButton.style.display = 'none'; // Hide the register button
     });
 
     showOtpButton.addEventListener('click', function() {
         hideGroup('group2');
+        hideGroup('group3');
         otpForm.style.display = 'block';
     });
 
     showRegisterButton.addEventListener('click', function() {
         hideGroup('group1');
+        hideGroup('group3');
         registerEmailForm.style.display = 'block';
         showLoginFormButton.style.display = 'none'; // Hide the login button
     });
 
     showDetailsFormButton.addEventListener('click', function() {
         hideGroup('group1');
+        hideGroup('group3');
         registerDetailsForm.style.display = 'block';
+    });
+
+     showRecoveryFormButton.addEventListener('click', function() {
+        hideGroup('group1');
+        hideGroup('group2');
+        loginForm.style.display = 'block';
+        showRegisterButton.style.display = 'none'; // Hide the register button
     });
 
    // Add event listener for OTP form submission
@@ -254,6 +272,7 @@
         // Hide forms and display user profile
         hideGroup('group1');
         hideGroup('group2');
+        hideGroup('group3');
         displayUserProfile(); // Function to populate and show the user profile
     });
 
@@ -275,6 +294,7 @@
             dropdown.style.display = 'none';
             hideGroup('group1');
             hideGroup('group2');
+            hideGroup('group3');
             resetButtonVisibility();
         }
     };
