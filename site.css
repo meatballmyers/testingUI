@@ -145,3 +145,8 @@ body, html {
         width: 80%; /* Set the width to 80% of the screen width for mobile */
     }
 }
+
+.error-message {
+    color: red;
+    font-family: 'Comic Sans MS';
+}

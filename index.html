@@ -23,11 +23,13 @@
                 <!-- Group 1: Login-related elements -->
                 <button id="show-login">Login</button>
                 <form id="login-form" class="group1">
-                    <input type="email" placeholder="Enter Email" id="email">
-                    <button type="button" id="show-otp">Go</button>
+                    <input type="email" name="email" placeholder="Enter Email" id="email">
+                    <p id="emailnotfounderror" class="error-message" style="display: none">Email Not Found</p>
+                    <button id="show-otp">Go</button>
                 </form>
                 <form id="otp-form" class="group1">
-                    <input type="text" placeholder="Enter OTP" id="otp">
+                    <input type="text" name="otp" placeholder="Enter OTP" id="otp">
+                    <p id="invalidotperror" class="error-message" style="display: none">Invalid OTP</p>
                     <button type="submit" id="submit-otp">Submit</button>
                 </form>
 
@@ -125,7 +127,8 @@
 
         </div>
 
-        
-<script src="site.js"></script>
+        <!--axios-->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="site.js"></script>
 </body>
 </html>

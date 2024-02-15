@@ -10,6 +10,9 @@
     var showDetailsFormButton = document.getElementById('show-details-form');
     var registerDetailsForm = document.getElementById('register-details-form');
     var showRecoveryButton = document.getElementById('account-recovery-button');
+    var email = ''
+    var emailnotfound = document.getElementById('emailnotfounderror')
+    var invalidOTP = document.getElementById('invalidotperror')
 
 
     menuButton.addEventListener('click', function () {
@@ -18,6 +21,27 @@
         resetButtonVisibility();
     });
 
+    //console.log('success :DD')
+
+    loginForm.addEventListener('submit', function(event){
+        console.log(event)
+        event.preventDefault()
+        const data = new FormData(event.target);
+        var payload = Object.fromEntries(data.entries())
+        email = payload.email
+        axios.post('/login/requestotp', payload).then(function(response){
+            emailnotfound.style.display = 'none'
+            //handle login here
+        })
+        .catch(function (){
+            emailnotfound.style.display = 'block'
+        })
+        //move to successful login when implemented
+        hideGroup('group2');
+        hideGroup('group3');
+        otpForm.style.display = 'block';
+    })
+
     showLoginFormButton.addEventListener('click', function () {
         hideGroup('group2');
         hideGroup('group3');
@@ -25,12 +49,12 @@
         showRegisterButton.style.display = 'none'; // Hide the register button
         showRecoveryButton.style.display = 'none';
     });
-
+/*
     showOtpButton.addEventListener('click', function () {
         hideGroup('group2');
         hideGroup('group3');
         otpForm.style.display = 'block';
-    });
+    });*/
 
     showRegisterButton.addEventListener('click', function () {
         hideGroup('group1');
@@ -56,12 +80,25 @@
     // Add event listener for OTP form submission
     document.getElementById('otp-form').addEventListener('submit', function (event) {
         event.preventDefault();
+        const data = new FormData(event.target);
+        var payload = Object.fromEntries(data.entries())
+        payload.email = email
+        axios.post('/login/otpverify', payload).then(function(response){
+            invalidOTP.style.display = 'none'
+            //handle login here
+        })
+        .catch(function (){
+            invalidOTP.style.display = 'block'
+        })
+        //move to successful login when implemented
         // Hide forms and display user profile
         hideGroup('group1');
         hideGroup('group2');
         hideGroup('group3');
         displayUserProfile(); // Function to populate and show the user profile
+
     });
+
     document.getElementById('account-recovery-button').addEventListener('click', function () {
         document.getElementById('account-recovery-section').style.display = 'block';
     });
